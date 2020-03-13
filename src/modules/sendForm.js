@@ -3,6 +3,7 @@
 const sendForm = () => {
     const userName = document.querySelectorAll('[name=user_name]'),
     userPhone = document.querySelectorAll('[name=user_phone]'),
+    userQuest = document.querySelector('[name=user_quest]'),
     forms = document.querySelectorAll('form');
 
     userName.forEach(elems =>
@@ -18,6 +19,11 @@ const sendForm = () => {
             target.value = target.value.replace(/[^+\d]/g, "");
         })
     );
+
+    userQuest.addEventListener('input', event => {
+        let target = event.target;
+        target.value = target.value.replace(/[^а-яА-ЯЁё.,\?\!\+\-;:() ]$/gi, "");
+    });
     
     const loadMessage = 'Идёт отправка...',
       errorMessage = 'Ошибка!',
