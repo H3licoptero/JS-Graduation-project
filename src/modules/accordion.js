@@ -4,12 +4,9 @@ const accordion = () => {
     const accordion = document.querySelectorAll('.panel-heading'),
     panelCollapse = document.querySelectorAll('.panel-collapse');
     let panelBody = document.querySelectorAll('.panel-body');
-    console.log(panelCollapse);
-    console.log(panelBody);
-    console.log(accordion);
-
-
-
+    // console.log(panelCollapse);
+    // console.log(panelBody);
+    // console.log(accordion);
 
     accordion.forEach((elem, item) => {
         elem.addEventListener('click', (event) => {
