@@ -48,10 +48,7 @@ let popup = () => {
       popupDiscount.addEventListener("click", event => {
         let target = event.target;
 
-        if (
-          target.matches(".popup-close") ||
-          target.matches(".popup-discount")
-        ) {
+        if (target.matches(".popup-close") || target.matches(".popup-discount")) {
           popupDiscount.style.display = "none";
         }
       });
