@@ -29,8 +29,8 @@ const sendForm = () => {
       errorMessage = 'Ошибка!',
       successMessage = 'Отправлено!';
 
-    const statusMesage = document.createElement('div');
-    statusMesage.style.cssText = "font-size: 18px";
+    const statusMessage = document.createElement('div');
+    statusMessage.style.cssText = "font-size: 18px";
 
     const postData = body => {
         return fetch('./server.php', {
@@ -47,8 +47,8 @@ const sendForm = () => {
             let target = event.target;
 
             event.preventDefault();
-            elems.appendChild(statusMesage);
-            statusMesage.textContent = loadMessage;
+            elems.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
 
             const formData = new FormData(elems);
             let body = {};
@@ -56,6 +56,10 @@ const sendForm = () => {
             formData.forEach((value, key) => {
                 body[key] = value;
             });
+
+            if(statusMessage) {
+                setTimeout(() => (statusMessage.textContent = ""), 5000);
+            }
 
             postData(body)
             .then(response => {
@@ -67,13 +71,11 @@ const sendForm = () => {
                     throw new Error('Status network not 200');
                 }
 
-                statusMesage.textContent = successMessage;
-                setTimeout(() => (statusMesage.textContent = ""), 5000);
+                statusMessage.textContent = successMessage;
                 elems.reset();
             })
             .catch(error => {
-                statusMesage.textContent = errorMessage;
-                setTimeout(() => (statusMesage.textContent = ""), 5000);
+                statusMessage.textContent = errorMessage;
                 console.error(error);
             });
         });

@@ -4,80 +4,54 @@
 let popup = () => {
   const callBtn = document.querySelectorAll(".call-btn"),
        popupCall = document.querySelector(".popup-call"),
-       discountBtn = document.querySelectorAll('.discount-btn'),
        popupDiscount = document.querySelector('.popup-discount'),
-       checkListBtn = document.querySelector('.gauging-button'),
        popupCheck = document.querySelector('.popup-check'),
-       consutationBtn = document.querySelector('.consultation-btn'),
-       popupConsultation = document.querySelector('.popup-consultation');    
-  
-    callBtn.forEach(elems => {
-      elems.addEventListener("click", event => {
-        let target = event.target;
-        if (target) {
-          popupCall.style.display = "block";
-        }       
+       popupConsultation = document.querySelector('.popup-consultation'),
+       popup = document.querySelectorAll('.popup'),
+       buttons = document.querySelectorAll('.button');
+
+      callBtn.forEach(elem => {
+        elem.addEventListener('click', (event) => {
+          let target = event.target;
+          if(target) {
+            popupCall.style.display = 'block';
+          }
+          event.preventDefault();
+          console.log(target);
+        });
       });
 
-      popupCall.addEventListener("click", event => {
-        let target = event.target;
+      for(let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', event => {
+          let target = event.target;
 
-        if (target.matches(".popup-close") || target.matches(".popup-call")) {
-          popupCall.style.display = "none";
-        }
-      });
-    });
+          if (target.matches(".call-btn")) {
+            popupCall.style.display = "block";
+          }
 
-    popupCall.addEventListener("click", event => {
-      let target = event.target;
+          if(target.matches('.discount-btn')) {
+            popupDiscount.style.display = 'block';
+          }
 
-      if (target.matches(".popup-close") || target.matches('.popup-call')) {
-        popupCall.style.display = "none";
+          if(target.matches('.gauging-button')) {
+            popupCheck.style.display = "block";
+          }
+
+          if (target.matches(".consultation-btn")) {
+            popupConsultation.style.display = "block";
+          }
+        });
       }
-    });
 
-    discountBtn.forEach(elems => {
-      elems.addEventListener("click", event => {
-        let target = event.target;
-        if (target) {
-          popupDiscount.style.display = "block";
-        }
+       for (let i = 0; i < popup.length; i++) {
+         popup[i].addEventListener("click", event => {
+           let target = event.target;
+           if (target.matches(".popup-close") || target.matches(".popup")) {
+             popup[i].style.display = "none";
+           }
+         });
+       }
 
-      });
-    
-      popupDiscount.addEventListener("click", event => {
-        let target = event.target;
-
-        if (target.matches(".popup-close") || target.matches(".popup-discount")) {
-          popupDiscount.style.display = "none";
-        }
-      });
-    });
-
-
-    checkListBtn.addEventListener('click', event => {
-      let target = event.target;
-      popupCheck.style.display = 'block';
-    });
-
-    popupCheck.addEventListener('click', event => {
-      let target = event.target;
-      if(target.matches('.popup-close') || target.matches('.popup-check')){
-        popupCheck.style.display = "none";
-      }
-    });
-
-    consutationBtn.addEventListener("click", event => {
-      let target = event.target;
-      popupConsultation.style.display = "block";
-    });
-
-    popupConsultation.addEventListener("click", event => {
-      let target = event.target;
-      if (target.matches(".popup-close") || target.matches(".popup-consultation")) {
-        popupConsultation.style.display = "none";
-      }
-    });
 };
 
 export default popup;
