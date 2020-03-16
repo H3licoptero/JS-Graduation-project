@@ -56,28 +56,27 @@ const sendForm = () => {
             formData.forEach((value, key) => {
                 body[key] = value;
             });
-
-            if(statusMessage) {
-                setTimeout(() => (statusMessage.textContent = ""), 5000);
-            }
-
+            
             postData(body)
-            .then(response => {
-                if(response.status === 400) {
-                    throw new Error('Data is not found');
+              .finally(() => {
+                setTimeout(() => (statusMessage.textContent = ""), 5000);
+              })
+              .then(response => {
+                if (response.status === 400) {
+                  throw new Error("Data is not found");
                 }
 
-                if(response.status !== 200) {
-                    throw new Error('Status network not 200');
+                if (response.status !== 200) {
+                  throw new Error("Status network not 200");
                 }
 
                 statusMessage.textContent = successMessage;
                 elems.reset();
-            })
-            .catch(error => {
+              })
+              .catch(error => {
                 statusMessage.textContent = errorMessage;
                 console.error(error);
-            });
+              });
         });
     });
 
