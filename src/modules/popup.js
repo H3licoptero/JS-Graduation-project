@@ -17,7 +17,6 @@ let popup = () => {
             popupCall.style.display = 'block';
           }
           event.preventDefault();
-          console.log(target);
         });
       });
 
@@ -44,7 +43,7 @@ let popup = () => {
       }
 
        for (let i = 0; i < popup.length; i++) {
-         popup[i].addEventListener("click", event => {
+         popup[i].addEventListener("click", (event) => {
            let target = event.target;
            if (target.matches(".popup-close") || target.matches(".popup")) {
              popup[i].style.display = "none";

@@ -1,24 +1,36 @@
-'use strict';
+"use strict";
 
 const accordion = () => {
-    let acc = document.querySelectorAll('.panel-heading');
-    let panelCollapse = document.querySelectorAll('.panel-collapse');    
+  let acc = document.querySelectorAll("#accordion-two"),
+    panelHeading = document.querySelectorAll(".panel-heading"),
+    panelCollapse = document.querySelectorAll(".collapse");
 
-    for (let i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", () => {
-           let target = event.target;
-        if (target.matches(".panel-heading")) {
-          let panel = target.nextElementSibling;
-          if (panel.style.display === "block") {
-            panel.style.display = "none";
-          } else {
-            panel.style.display = "block";
-          }
-          console.log(target);
-        }
-      });
+  let contentChange = index => {
+    for (let i = 0; i < panelCollapse.length; i++) {
+      if (index === i) {
+        panelCollapse[i].style.display = "block";
+      } else {
+        panelCollapse[i].style.display = "none";
+      }
     }
+  };
 
+  acc.forEach(el => {
+    el.addEventListener("click", event => {
+      let target = event.target;
+      target = target.closest(".panel-heading");
+
+      if (target) {
+        panelHeading.forEach((item, i) => {
+          if (item === target) {
+            contentChange(i);
+          }
+        });
+      }
+
+      event.preventDefault();
+    });
+  });
 };
 
 export default accordion;
