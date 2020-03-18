@@ -10,24 +10,24 @@ const calculate = () => {
   const aproximateCost = constructor.querySelector("#calc-result");
 
   //тут select для всех колодцев
-  const diametrSelect = constructor.querySelectorAll(".diametr-select"),
-    ringsSelect = constructor.querySelectorAll(".rings-select");
+  const diameterSelect = constructor.querySelectorAll(".diametr-select"),
+    ringSelect = constructor.querySelectorAll(".rings-select");
 
   // тут второй переключатель, для выбора дна
   const secondSwitch = constructor.querySelector("#myonoffswitch-two"),
     distanceInput = constructor.querySelector(".distance-from-home");
 
-  const firstWell = constructor.querySelector(".first-well");
-  const secondWell = constructor.querySelector(".second-well");
+  const firstDrawWell = constructor.querySelector(".first-well");
+  const secondDrawWell = constructor.querySelector(".second-well");
 
-  // console.log(diametrSelect);
-  // console.log(ringsSelect);
+  distanceInput.addEventListener('input', event => {
+    distanceInput.value = distanceInput.value.replace(/\D/g, '');
+  });
   
-
   let data = {
    price: 10000,
    type: true,
-   diametr: ['1.4 метра'],
+   diameter: ['1.4 метра'],
    rings: ['1 штука'],
    bottom: true,
    distance: 0 
@@ -35,44 +35,44 @@ const calculate = () => {
 
   let getInformation = () => {
 
-    secondWell.style.display = 'none';
+    secondDrawWell.style.display = "none";
     secondSwitch.checked = data.bottom;
 
     firstSwitch.addEventListener("change", () => {
 
       if (firstSwitch.checked) {
-        secondWell.style.display = "none";
-        firstWell.style.display = "block";
+        secondDrawWell.style.display = "none";
+        firstDrawWell.style.display = "block";
         data.price = 10000;
         data.type = true;
 
         aproximateCost.value = data.firstPrice;
 
         if(data.diametr.length > 1) {
-          data.diametr.pop();
+          data.diameter.pop();
         }
 
         if(data.rings.length > 1) {
-          data.diametr.pop();
+          data.diameter.pop();
         }
 
       } else {
-        secondWell.style.display = "block";
+        secondDrawWell.style.display = "block";
         data.type = false;
         data.price = 15000;
-        data.diametr.push("1.4 метра");
+        data.diameter.push("1.4 метра");
         data.rings.push("1 штука");
       }
 
     });
 
-    diametrSelect.forEach((elems, i) => {
-      elems.addEventListener('change', event => {
-        data.diametr[i] = elems.value;
+    diameterSelect.forEach((elems, i) => {
+      elems.addEventListener("change", event => {
+        data.diameter[i] = elems.value;
       });
     });
 
-    ringsSelect.forEach((elems, i) => {
+    ringSelect.forEach((elems, i) => {
       elems.addEventListener('change', event => {
         data.rings[i] = elems.value; 
       });
@@ -99,7 +99,7 @@ const calculate = () => {
 
     let startPrice = 0,
       lastPrice = 0,
-      diametrChange = 1,
+      diameterChange = 1,
       ringsChange = 1;
 
     if (data.type) {
@@ -108,13 +108,13 @@ const calculate = () => {
       startPrice = 15000;
     }
 
-    diametrSelect.forEach(elems => {
+    diameterSelect.forEach(elems => {
       if (elems.value === "2 метра") {
-        diametrChange *= 1.2;
+        diameterChange *= 1.2;
       }
     });
 
-    ringsSelect.forEach(elems => {
+    ringSelect.forEach(elems => {
       if (elems.value === "2 штуки") {
         ringsChange *= 1.3;
       } else if (elems.value === "3 штуки") {
@@ -128,7 +128,7 @@ const calculate = () => {
       lastPrice = 2000;
     }
 
-    data.price = Math.floor(startPrice * diametrChange * ringsChange + lastPrice);
+    data.price = Math.floor(startPrice * diameterChange * ringsChange + lastPrice);
 
   };
 
@@ -141,14 +141,14 @@ const calculate = () => {
       aproximateCost.value = data.price;
     }
 
-    diametrSelect.forEach(el => {
+    diameterSelect.forEach(el => {
       if (target === el) {
         countCost(data);
         aproximateCost.value = data.price;
       }
     });
 
-    ringsSelect.forEach(el => {
+    ringSelect.forEach(el => {
       if (target === el) {
         countCost(data);
         aproximateCost.value = data.price;
