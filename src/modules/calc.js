@@ -63,16 +63,22 @@ const calculate = () => {
 
   changeCamera();
 
-  let withBottom = 1000;
+  const changeSecondSwitch = () => {
+    let withBottom = 1000;
 
-  secondSwitch.addEventListener("change", event => {
-    let target = event.target;
-    if (target.checked) {
-      aproximateCost.value = firstBoxPrice + withBottom;
-    } else {
-      aproximateCost.value = firstBoxPrice;
-    }
-  });
+    secondSwitch.addEventListener("change", event => {
+      let target = event.target;
+
+      if (target.checked) {
+        aproximateCost.value = firstBoxPrice + withBottom;
+      } else {
+        aproximateCost.value = firstBoxPrice;
+      }
+    });
+  };
+
+  changeSecondSwitch();
+
 
   let countCost = () => {
     let formSelect = document.querySelectorAll(".form-control");
@@ -84,50 +90,106 @@ const calculate = () => {
       secondBoxValue: (firstBoxPrice * 30) / 100,
       thirdBoxValue: (firstBoxPrice * 50) / 100,
       firstBoxValueTwo: (secondBoxPrice * 20) / 100,
-      secondBoxValueTwo: (secondBoxPrice * 20) / 100,
-      thirdBoxValueTwo: (secondBoxPrice * 20) / 100,
+      secondBoxValueTwo: (secondBoxPrice * 30) / 100,
+      thirdBoxValueTwo: (secondBoxPrice * 50) / 100,
       withBottom: 1000,
       doubleBottom: 2000,
       result: 0
     };
 
-    console.log(values);
+    firstBoxSelect.addEventListener('change', event => {
+      let target = event.target;
+      if (target.options[1].selected) {
+        aproximateCost.value = values.firstBoxValue + values.firstBoxPrice;
+      } else if (target.options[0].selected) {
+        aproximateCost.value = values.firstBoxPrice;
+      }  
+    });
 
-    formSelect.forEach(elems => {
-      elems.addEventListener("change", event => {
+    firstSelectRings.addEventListener("change", event => {
+      let target = event.target;
+      if (target.options[1].selected) {
+        aproximateCost.value = values.secondBoxValue + values.firstBoxPrice;
+      } else if (target.options[0].selected) {
+        aproximateCost.value = values.firstBoxPrice;
+      } else if(target.options[2].selected) {
+        aproximateCost.value = values.thirdBoxValue + values.firstBoxPrice;
+      }
+
+    });
+
+     secondBoxSelect.addEventListener("change", event => {
+       let target = event.target;
+       if (target.options[1].selected) {
+         aproximateCost.value = values.firstBoxValueTwo + values.secondBoxPrice;
+       } else if (target.options[0].selected) {
+         aproximateCost.value = values.secondBoxPrice;
+       }
+     });
+
+      secondSelectRings.addEventListener("change", event => {
         let target = event.target;
-        let changeValue = elems.options[elems.selectedIndex].value;
-        // тут select-ы, чтоб их
-        let firstBox = elems.closest(".first-select");
-        let secondBox = elems.closest(".first-select-rings");
-        let thirdBox = elems.closest(".second-select");
-        let fourthBox = elems.closest(".second-select-rings");
-
-        if (elems.closest(".first-select")) {
-          values.result = values.firstBoxPrice + values.firstBoxValue;
-          aproximateCost.value = values.result;
-          console.log(changeValue);
-        }
-
-        if (elems.closest(".first-select-rings")) {
-          values.result = values.firstBoxPrice + values.secondBoxValue;
-          aproximateCost.value = values.result;
-          console.log(changeValue);
-        }
-
-        if (elems.closest(".second-select")) {
-          values.result = values.firstBoxPrice + values.thirdBoxValue;
-          aproximateCost.value = values.result;
-          console.log(changeValue);
-        }
-
-        if (elems.closest(".second-select-rings")) {
-          values.result = values.firstBoxPrice + values.secondBoxValue;
-          aproximateCost.value = values.result;
-          console.log(changeValue);
+        if (target.options[1].selected) {
+          aproximateCost.value = values.secondBoxValueTwo + values.secondBoxPrice;
+        } else if (target.options[0].selected) {
+          aproximateCost.value = values.secondBoxPrice;
+        } else if (target.options[2].selected) {
+          aproximateCost.value = values.thirdBoxValueTwo + values.secondBoxPrice;
         }
       });
-    });
+
+    //  if(firstBoxSelect && firstSelectRings) {
+    //    aproximateCost.value =
+    //      values.firstBoxValue + values.secondBoxValue + values.firstBoxPrice;
+    //  }
+
+
+
+    console.log(values);
+
+  //   formSelect.forEach(elems => {
+  //     elems.addEventListener("change", event => {
+  //       let target = event.target;
+  //       let changeValue = elems.options[elems.selectedIndex].value;
+  //       // тут select-ы, чтоб их
+  //       let firstBox = elems.closest(".first-select");
+  //       let secondBox = elems.closest(".first-select-rings");
+
+  //       if (elems.closest(".first-select")) {
+  //         values.result = values.firstBoxPrice + values.firstBoxValue;
+  //         aproximateCost.value = values.result;
+  //         console.log(changeValue);
+  //       }
+
+  //       if (elems.closest(".first-select-rings")) {
+  //         values.result = values.firstBoxPrice + values.secondBoxValue;
+  //         aproximateCost.value = values.result;
+  //         console.log(changeValue);
+  //       }
+  //     });
+  //   });
+
+  //   formSelect.forEach(elems => {
+  //     elems.addEventListener("change", event => {
+  //       let target = event.target;
+  //       let changeValue = elems.options[elems.selectedIndex].value;
+  //       // тут select-ы, чтоб их
+  //       let thirdBox = elems.closest(".second-select");
+  //       let fourthBox = elems.closest(".second-select-rings");
+
+  //       if (elems.closest(".second-select")) {
+  //         values.result = values.firstBoxPrice + values.firstBoxValue;
+  //         aproximateCost.value = values.result;
+  //         console.log(changeValue);
+  //       }
+
+  //       if (elems.closest(".second-select-rings")) {
+  //         values.result = values.firstBoxPrice + values.secondBoxValue;
+  //         aproximateCost.value = values.result;
+  //         console.log(changeValue);
+  //       }
+  //     });
+  //   });
   };
 
   countCost();

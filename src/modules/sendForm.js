@@ -1,10 +1,10 @@
 'use strict';
 
 const sendForm = () => {
-    const userName = document.querySelectorAll('[name=user_name]'),
-    userPhone = document.querySelectorAll('[name=user_phone]'),
-    userQuest = document.querySelector('[name=user_quest]'),
-    forms = document.querySelectorAll('form');
+    const userName = document.querySelectorAll("[name=user_name]"),
+      userPhone = document.querySelectorAll("[name=user_phone]"),
+      userQuest = document.querySelector("[name=user_quest]"),
+      forms = document.querySelectorAll("form");
 
     userName.forEach(elems =>
         elems.addEventListener('input', (event) => {

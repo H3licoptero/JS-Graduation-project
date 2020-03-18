@@ -2,7 +2,7 @@
 
 //accordion
 const accordion = () => {
-  let acc = document.querySelectorAll(".panel-heading"),
+  const acc = document.querySelectorAll("#accordion-two"),
     panelHeading = document.querySelectorAll(".panel-heading"),
     panelCollapse = document.querySelectorAll(".collapse");
 
