@@ -2,7 +2,7 @@
 
 //accordion
 const accordion = () => {
-  const acc = document.querySelectorAll("#accordion-two"),
+  const acc = document.querySelector("#accordion-two"),
     panelHeading = document.querySelectorAll(".panel-heading"),
     panelCollapse = document.querySelectorAll(".collapse");
 
@@ -12,12 +12,11 @@ const accordion = () => {
         panelCollapse[i].style.display = "block";
       } else {
         panelCollapse[i].style.display = "none";
-      }
-    }  
+      }  
+    }
   };
 
-  acc.forEach(el => {
-    el.addEventListener("click", event => {
+    acc.addEventListener("click", event => {
       let target = event.target;
       target = target.closest(".panel-heading");
 
@@ -31,8 +30,6 @@ const accordion = () => {
 
       event.preventDefault();
     });
-  });
-
 };
 
 export default accordion;

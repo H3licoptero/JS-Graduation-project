@@ -9,9 +9,8 @@ const sendForm = () => {
     userPhone = document.querySelectorAll("[name=user_phone]"),
     userQuest = document.querySelector("[name=user_quest]"),
     forms = document.querySelectorAll("form");
-    console.log(forms);
     
-
+    
   userName.forEach(elems =>
     elems.addEventListener('input', (event) => {
         let target = event.target;
