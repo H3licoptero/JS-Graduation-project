@@ -1,85 +1,94 @@
 'use strict';
 
+import{
+  object 
+} from './calc';
+
 const sendForm = () => {
-    const userName = document.querySelectorAll("[name=user_name]"),
-      userPhone = document.querySelectorAll("[name=user_phone]"),
-      userQuest = document.querySelector("[name=user_quest]"),
-      forms = document.querySelectorAll("form");
-
-    userName.forEach(elems =>
-        elems.addEventListener('input', (event) => {
-            let target = event.target;
-            target.value = target.value.replace(/[^а-яА-ЯЁё ]$/gi, "");
-        })
-    );
-
-    userPhone.forEach(elems => 
-        elems.addEventListener('input', (event) => {
-            let target = event.target;
-            target.value = target.value.replace(/[^+\d]/g, "");
-        })
-    );
-
-    userQuest.addEventListener('input', event => {
-        let target = event.target;
-        target.value = target.value.replace(/[^а-яА-ЯЁё.,\?\!\+\-;:() ]$/gi, "");
-    });
+  const userName = document.querySelectorAll("[name=user_name]"),
+    userPhone = document.querySelectorAll("[name=user_phone]"),
+    userQuest = document.querySelector("[name=user_quest]"),
+    forms = document.querySelectorAll("form");
+    console.log(forms);
     
-    const loadMessage = 'Идёт отправка...',
-      errorMessage = 'Ошибка!',
-      successMessage = 'Отправлено!';
 
-    const statusMessage = document.createElement('div');
-    statusMessage.style.cssText = "font-size: 18px";
+  userName.forEach(elems =>
+    elems.addEventListener('input', (event) => {
+        let target = event.target;
+        target.value = target.value.replace(/[^а-яА-ЯЁё ]$/gi, "");
+    })
+  );
 
-    const postData = body => {
-        return fetch('./server.php', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        });
-    };
+  userPhone.forEach(elems => 
+    elems.addEventListener('input', (event) => {
+        let target = event.target;
+        target.value = target.value.replace(/[^+\d]/g, "");
+    })
+  );
 
-    forms.forEach(elems => {
-        elems.addEventListener('submit', (event) => {
-            let target = event.target;
+  userQuest.addEventListener('input', event => {
+      let target = event.target;
+      target.value = target.value.replace(/[^а-яА-ЯЁё.,\?\!\+\-;:() ]$/gi, "");
+  });
+  
+  const loadMessage = 'Идёт отправка...',
+    errorMessage = 'Ошибка!',
+    successMessage = 'Отправлено!';
 
-            event.preventDefault();
-            elems.appendChild(statusMessage);
-            statusMessage.textContent = loadMessage;
+  const statusMessage = document.createElement('div');
+  statusMessage.style.cssText = "font-size: 18px";
 
-            const formData = new FormData(elems);
-            let body = {};
+  const postData = body => {
+    return fetch('./server.php', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+  };
 
-            formData.forEach((value, key) => {
-                body[key] = value;
-            });
-            
-            postData(body)
-              .finally(() => {
-                setTimeout(() => (statusMessage.textContent = ""), 5000);
-              })
-              .then(response => {
-                if (response.status === 400) {
-                  throw new Error("Data is not found");
-                }
+  forms.forEach(elems => {
+  elems.addEventListener('submit', (event) => {
+    let target = event.target;
 
-                if (response.status !== 200) {
-                  throw new Error("Status network not 200");
-                }
+    event.preventDefault();
+    elems.appendChild(statusMessage);
+    statusMessage.textContent = loadMessage;
 
-                statusMessage.textContent = successMessage;
-                elems.reset();
-              })
-              .catch(error => {
-                statusMessage.textContent = errorMessage;
-                console.error(error);
-              });
-        });
+    const formData = new FormData(elems);
+    let body = {};
+
+    formData.forEach((value, key) => {
+        body[key] = value;
     });
 
+    if(forms) {
+      body = Object.assign({}, object, body);
+    }
+    
+    postData(body)
+      .finally(() => {
+        setTimeout(() => (statusMessage.textContent = ""), 5000);
+      })
+      .then(response => {
+        if (response.status === 400) {
+          throw new Error("Data is not found");
+        }
+
+        if (response.status !== 200) {
+          throw new Error("Status network not 200");
+        }
+
+        statusMessage.textContent = successMessage;
+        elems.reset();
+      })
+      .catch(error => {
+        statusMessage.textContent = errorMessage;
+        console.error(error);
+      });
+    });
+  });
 };
 
 export default sendForm;
