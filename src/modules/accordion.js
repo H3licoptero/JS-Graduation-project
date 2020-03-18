@@ -1,7 +1,8 @@
 "use strict";
 
+//accordion
 const accordion = () => {
-  let acc = document.querySelectorAll("#accordion-two"),
+  let acc = document.querySelectorAll(".panel-heading"),
     panelHeading = document.querySelectorAll(".panel-heading"),
     panelCollapse = document.querySelectorAll(".collapse");
 
@@ -12,7 +13,7 @@ const accordion = () => {
       } else {
         panelCollapse[i].style.display = "none";
       }
-    }
+    }  
   };
 
   acc.forEach(el => {
@@ -31,6 +32,7 @@ const accordion = () => {
       event.preventDefault();
     });
   });
+
 };
 
 export default accordion;
