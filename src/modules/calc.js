@@ -160,8 +160,10 @@ const calculate = () => {
 };
 
 const object = calculate();
+const obj = calculate();
 
 export {
   calculate, 
-  object
+  object, 
+  obj
 };

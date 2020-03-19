@@ -4,9 +4,7 @@
 const accordion = () => {
   const acc = document.querySelector("#accordion-two"),
     panelHeading = document.querySelectorAll(".panel-heading"),
-    panelCollapse = document.querySelectorAll(".collapse");
-    console.log(acc);
-    
+    panelCollapse = document.querySelectorAll(".collapse");    
 
   let contentChange = index => {
     for (let i = 0; i < panelCollapse.length; i++) {
