@@ -6,11 +6,11 @@ const changeBody = () => {
      panelCollapse = constructor.querySelectorAll(".panel-collapse"),
      buttons = constructor.querySelectorAll(".construct-btn");
 
-    panelHeading.forEach((caption, captionIndex) => {
+    panelHeading.forEach((header, headerIndex) => {
       panelCollapse.forEach((content, contentIndex) => {
-        caption.addEventListener("click", event => {
+        header.addEventListener("click", event => {
           event.preventDefault();
-          if (captionIndex === contentIndex) {
+          if (headerIndex === contentIndex) {
             content.style.display = "block";
           } else {
             content.style.display = "none";
@@ -19,12 +19,12 @@ const changeBody = () => {
       });
     });
 
-    buttons.forEach((button, index) => {
+    buttons.forEach((elems, index) => {
       if (index !== buttons.length - 1) {
-        button.addEventListener("click", event => {
+        elems.addEventListener("click", event => {
           event.preventDefault();
-          button.parentNode.parentNode.style.display = "none";
-          button.parentNode.parentNode.parentNode.nextElementSibling.childNodes[3].style.display = "block";
+          elems.parentNode.parentNode.style.display = "none";
+          elems.parentNode.parentNode.parentNode.nextElementSibling.childNodes[3].style.display = "block";
         });
       }
     });

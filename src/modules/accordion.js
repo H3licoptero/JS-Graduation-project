@@ -29,7 +29,7 @@ const accordion = () => {
       }
 
       event.preventDefault();
-    });
+    });    
 };
 
 export default accordion;

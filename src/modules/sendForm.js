@@ -15,6 +15,7 @@ const sendForm = () => {
     elems.addEventListener('input', (event) => {
         let target = event.target;
         target.value = target.value.replace(/[^а-яА-ЯЁё ]$/gi, "");
+        event.preventDefault();
     })
   );
 

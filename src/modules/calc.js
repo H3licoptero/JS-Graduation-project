@@ -48,7 +48,7 @@ const calculate = () => {
 
         aproximateCost.value = data.firstPrice;
 
-        if(data.diametr.length > 1) {
+        if(data.diameter.length > 1) {
           data.diameter.pop();
         }
 
