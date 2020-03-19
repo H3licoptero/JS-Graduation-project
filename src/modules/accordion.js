@@ -5,6 +5,8 @@ const accordion = () => {
   const acc = document.querySelector("#accordion-two"),
     panelHeading = document.querySelectorAll(".panel-heading"),
     panelCollapse = document.querySelectorAll(".collapse");
+    console.log(acc);
+    
 
   let contentChange = index => {
     for (let i = 0; i < panelCollapse.length; i++) {
@@ -14,6 +16,7 @@ const accordion = () => {
         panelCollapse[i].style.display = "none";
       }  
     }
+    
   };
 
     acc.addEventListener("click", event => {
@@ -30,6 +33,7 @@ const accordion = () => {
 
       event.preventDefault();
     });    
+
 };
 
 export default accordion;
