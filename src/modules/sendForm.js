@@ -7,8 +7,7 @@ const sendForm = () => {
     userPhone = document.querySelectorAll("[name=user_phone]"),
     userQuest = document.querySelector("[name=user_quest]"),
     forms = document.querySelectorAll("form");
-    console.log(forms);
-    
+
   userName.forEach(elems =>
     elems.addEventListener("input", event => {
       let target = event.target;
@@ -36,7 +35,7 @@ const sendForm = () => {
   const statusMessage = document.createElement("div");
   statusMessage.style.cssText = "font-size: 18px";
 
-  const form = document.querySelector(".popup-discount .capture-form");
+  const discountForm = document.querySelector(".popup-discount .capture-form");
 
   const postData = body => {
     return fetch("./server.php", {
@@ -48,29 +47,26 @@ const sendForm = () => {
     });
   };
 
-  forms.forEach(elems => {
-    elems.addEventListener("submit", event => {
+  forms.forEach(form => {
+    form.addEventListener("submit", event => {
       let target = event.target;
 
       event.preventDefault();
-      elems.appendChild(statusMessage);
+      form.appendChild(statusMessage);
       statusMessage.textContent = loadMessage;
 
-      const formData = new FormData(elems);
+      const formData = new FormData(form);
       let body = {};
 
       formData.forEach((value, key) => {
         body[key] = value;
       });
 
-      if (elems === form) {
+      if (discountForm === form) {
         body = Object.assign({}, object, body);
       }
 
       postData(body)
-        .finally(() => {
-          setTimeout(() => (statusMessage.textContent = ""), 5000);
-        })
         .then(response => {
           if (response.status === 400) {
             throw new Error("Data is not found");
@@ -86,6 +82,9 @@ const sendForm = () => {
         .catch(error => {
           statusMessage.textContent = errorMessage;
           console.error(error);
+        })
+        .finally(() => {
+          setTimeout(() => (statusMessage.textContent = ""), 5000);
         });
     });
   });
