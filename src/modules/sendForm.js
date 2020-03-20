@@ -77,7 +77,7 @@ const sendForm = () => {
           }
 
           statusMessage.textContent = successMessage;
-          forms.reset();
+          form.reset();
         })
         .catch(error => {
           statusMessage.textContent = errorMessage;
